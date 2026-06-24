@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import photo from "./assets/photo.jpeg";
+import photo from "./assets/photo.svg";
 import Doodles from "./components/Doodles";
 import Reveal from "./components/Reveal";
 import Pill from "./components/Pill";
@@ -72,6 +72,8 @@ export default function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  
+
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setNavOpen(false);
@@ -127,8 +129,8 @@ export default function App() {
       <section id="home" className="hero">
         <div className="hero__text">
           <div className="section-eyebrow section-eyebrow--green">✦ Hello, I'm</div>
-          <h1 className="hero__name">Ishika<br />Sogra</h1>
-          <div className="hero__role cursor">Developer & Designer</div>
+          <h1 className="hero__name">Ishika Sogra</h1>
+          <div className="hero__role cursor">Developer &amp; Designer</div>
           <p className="hero__bio">
             I build thoughtful digital experiences — blending clean code with expressive design to make the web a more beautiful place.
           </p>
@@ -143,18 +145,19 @@ export default function App() {
           </div>
         </div>
 
-        {/* ── PHOTO FRAME ── */}
+        {/* ── PHOTO VISUAL — matches Figma: blob + gold ring ── */}
         <div className="hero__visual">
-          <div className="photo-frame">
-            {/* decorative doodles around photo */}
-            <span className="photo-doodle photo-doodle--star">✦</span>
-            <span className="photo-doodle photo-doodle--circle">◯</span>
-            <span className="photo-doodle photo-doodle--dot">•••</span>
-            <span className="photo-doodle photo-doodle--squiggle">〜</span>
-            <span className="photo-doodle photo-doodle--cross">✕</span>
-            <img src={photo} alt="Ishika Sogra" className="photo-frame__img" />
+          <div className="photo-cluster">
+            <span className="pdoodle pdoodle--star">✦</span>
+            <span className="pdoodle pdoodle--cross">✕</span>
+            <span className="pdoodle pdoodle--dot">•••</span>
+            <span className="pdoodle pdoodle--squiggle">〜</span>
+            <span className="pdoodle pdoodle--circle">◯</span>
+            <div className="blob-circle" />
+            <div className="gold-ring">
+              <img src={photo} alt="Ishika Sogra" className="gold-ring__img" />
+            </div>
           </div>
-          
         </div>
       </section>
 

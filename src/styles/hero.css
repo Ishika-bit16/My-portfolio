@@ -88,86 +88,117 @@
 .hero__visual {
   flex: 0 0 auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 24px;
+  justify-content: center;
 }
 
-/* ── Photo frame with doodles ── */
-.photo-frame {
+/* ── Photo cluster wrapper ── */
+.photo-cluster {
   position: relative;
-  width: clamp(220px, 28vw, 300px);
-  height: clamp(220px, 28vw, 300px);
+  width: clamp(280px, 32vw, 380px);
+  height: clamp(300px, 36vw, 410px);
 }
 
-.photo-frame__img {
+/* ── Pale yellow soft blob (bottom-left) ── */
+.blob-circle {
+  position: absolute;
+  bottom: -10px;
+  left: -30px;
+  width: 68%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #8a826d;
+  opacity: 0.85;
+  animation: blobFloat 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-6px, -10px) scale(1.03); }
+  70%       { transform: translate(4px, -5px) scale(0.98); }
+}
+
+/* ── Gold ring frame ── */
+.gold-ring {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 10px solid #F5C842;
+  overflow: hidden;
+  z-index: 2;
+  animation: ringFloat 5s ease-in-out infinite;
+  box-shadow:
+    0 0 0 2px rgba(245, 200, 66, 0.15),
+    0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+@keyframes ringFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+.gold-ring__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  border-radius: 50%;
-  border: 3px solid rgba(245, 200, 66, 0.35);
-  box-shadow:
-    0 0 0 8px rgba(245, 200, 66, 0.06),
-    0 0 40px rgba(245, 200, 66, 0.12),
-    0 20px 60px rgba(0, 0, 0, 0.5);
   display: block;
-  animation: ripple 3s ease-out infinite;
 }
 
-/* ── Doodles around photo ── */
-.photo-doodle {
+/* ── Floating doodles ── */
+.pdoodle {
   position: absolute;
   font-style: normal;
   line-height: 1;
   pointer-events: none;
   user-select: none;
+  z-index: 3;
 }
 
-.photo-doodle--star {
-  top: -12px;
-  right: 10px;
+.pdoodle--star {
+  top: -10px;
+  right: -4px;
   font-size: 1.4rem;
   color: var(--gold);
+  text-shadow: 0 0 10px rgba(245, 200, 66, 0.7);
   animation: floatA 3s ease-in-out infinite;
-  text-shadow: 0 0 10px rgba(245, 200, 66, 0.6);
 }
-
-.photo-doodle--circle {
-  bottom: 5px;
-  left: -16px;
-  font-size: 1.8rem;
+.pdoodle--cross {
+  top: 12%;
+  left: 4px;
+  font-size: 1rem;
   color: var(--lavender);
   opacity: 0.8;
-  animation: floatB 4s ease-in-out infinite;
+  animation: floatB 3.4s ease-in-out infinite 0.6s;
 }
-
-.photo-doodle--dot {
-  top: 30%;
-  right: -22px;
+.pdoodle--dot {
+  top: 42%;
+  right: -18px;
   font-size: 1rem;
   letter-spacing: -4px;
   color: var(--green);
   opacity: 0.9;
-  animation: floatA 3.5s ease-in-out infinite 0.5s;
+  animation: floatA 3.8s ease-in-out infinite 0.3s;
 }
-
-.photo-doodle--squiggle {
-  bottom: 15%;
-  right: -18px;
+.pdoodle--squiggle {
+  bottom: 18%;
+  right: -14px;
   font-size: 1.5rem;
   color: var(--gold);
   opacity: 0.7;
-  animation: floatB 4.5s ease-in-out infinite 1s;
+  animation: floatB 4.2s ease-in-out infinite 1s;
 }
-
-.photo-doodle--cross {
-  top: 10%;
-  left: -14px;
-  font-size: 1rem;
+.pdoodle--circle {
+  bottom: 8%;
+  left: 6px;
+  font-size: 1.6rem;
   color: var(--lavender);
-  opacity: 0.75;
-  animation: floatA 3.2s ease-in-out infinite 0.8s;
+  opacity: 0.65;
+  animation: floatA 5s ease-in-out infinite 0.8s;
 }
 
 .hero__scroll-hint {
