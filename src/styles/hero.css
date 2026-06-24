@@ -1,0 +1,178 @@
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 5% 60px;
+  position: relative;
+  z-index: 1;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+/* ── Left text block ── */
+.hero__text {
+  flex: 1 1 340px;
+  min-width: 280px;
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.05;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #F5F0E8 0%, #F5C842 60%, #B8A9E8 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradShift 6s ease infinite;
+}
+
+.hero__role {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: rgba(245, 240, 232, 0.5);
+  margin-bottom: 28px;
+}
+
+.cursor::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+  color: var(--gold);
+  margin-left: 2px;
+}
+
+.hero__bio {
+  color: rgba(245, 240, 232, 0.55);
+  line-height: 1.8;
+  max-width: 400px;
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+}
+
+.hero__cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ── Social links ── */
+.hero__social {
+  display: flex;
+  gap: 20px;
+  margin-top: 36px;
+  align-items: center;
+}
+.hero__social-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: rgba(245, 240, 232, 0.3);
+  text-transform: uppercase;
+}
+.hero__social-link {
+  color: rgba(245, 240, 232, 0.5);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(245, 240, 232, 0.2);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.hero__social-link--github:hover   { color: var(--green);    border-color: var(--green); }
+.hero__social-link--linkedin:hover { color: var(--lavender); border-color: var(--lavender); }
+
+/* ── Right visual block ── */
+.hero__visual {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── Photo frame with doodles ── */
+.photo-frame {
+  position: relative;
+  width: clamp(220px, 28vw, 300px);
+  height: clamp(220px, 28vw, 300px);
+}
+
+.photo-frame__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  border: 3px solid rgba(245, 200, 66, 0.35);
+  box-shadow:
+    0 0 0 8px rgba(245, 200, 66, 0.06),
+    0 0 40px rgba(245, 200, 66, 0.12),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+  display: block;
+  animation: ripple 3s ease-out infinite;
+}
+
+/* ── Doodles around photo ── */
+.photo-doodle {
+  position: absolute;
+  font-style: normal;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.photo-doodle--star {
+  top: -12px;
+  right: 10px;
+  font-size: 1.4rem;
+  color: var(--gold);
+  animation: floatA 3s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(245, 200, 66, 0.6);
+}
+
+.photo-doodle--circle {
+  bottom: 5px;
+  left: -16px;
+  font-size: 1.8rem;
+  color: var(--lavender);
+  opacity: 0.8;
+  animation: floatB 4s ease-in-out infinite;
+}
+
+.photo-doodle--dot {
+  top: 30%;
+  right: -22px;
+  font-size: 1rem;
+  letter-spacing: -4px;
+  color: var(--green);
+  opacity: 0.9;
+  animation: floatA 3.5s ease-in-out infinite 0.5s;
+}
+
+.photo-doodle--squiggle {
+  bottom: 15%;
+  right: -18px;
+  font-size: 1.5rem;
+  color: var(--gold);
+  opacity: 0.7;
+  animation: floatB 4.5s ease-in-out infinite 1s;
+}
+
+.photo-doodle--cross {
+  top: 10%;
+  left: -14px;
+  font-size: 1rem;
+  color: var(--lavender);
+  opacity: 0.75;
+  animation: floatA 3.2s ease-in-out infinite 0.8s;
+}
+
+.hero__scroll-hint {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: rgba(245, 240, 232, 0.3);
+  text-transform: uppercase;
+}

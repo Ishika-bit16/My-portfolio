@@ -1,0 +1,178 @@
+/* ── Google Fonts ── */
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+/* ── CSS Variables ── */
+:root {
+  --black:     #0A0A0A;
+  --white:     #F5F0E8;
+  --gold:      #F5C842;
+  --gold-dim:  #F7A825;
+  --green:     #7EC8A0;
+  --lavender:  #B8A9E8;
+
+  --font-display: "Syne", sans-serif;
+  --font-body:    "DM Sans", sans-serif;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: rgba(245, 200, 66, 0.4); border-radius: 4px; }
+
+/* ── Keyframes ── */
+@keyframes floatA {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-14px) rotate(3deg); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-10px) rotate(-4deg); }
+}
+@keyframes gradShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes ripple {
+  0%   { box-shadow: 0 0 0 0 rgba(245, 200, 66, 0.35); }
+  70%  { box-shadow: 0 0 0 18px rgba(245, 200, 66, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 200, 66, 0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── App wrapper ── */
+.app {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Shared layout ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+.container--narrow {
+  max-width: 700px;
+  text-align: center;
+}
+
+.section {
+  min-height: 75vh;
+  padding: 100px 5%;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Section labels ── */
+.section-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+}
+.section-eyebrow--gold    { color: var(--gold); }
+.section-eyebrow--green   { color: var(--green); }
+.section-eyebrow--lavender{ color: var(--lavender); }
+
+/* ── Headings ── */
+.section-heading {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.1;
+  margin-bottom: 48px;
+  color: var(--white);
+}
+.section-heading--center { text-align: center; }
+
+.accent-gold    { color: var(--gold); }
+.accent-green   { color: var(--green); }
+.accent-lavender{ color: var(--lavender); }
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245, 200, 66, 0.3), transparent);
+  margin: 0 5%;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
+  padding: 12px 28px;
+  text-decoration: none;
+}
+.btn--primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  border: none;
+  color: var(--black);
+  box-shadow: 0 4px 24px rgba(245, 200, 66, 0.3);
+}
+.btn--primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px rgba(245, 200, 66, 0.45);
+}
+.btn--outline {
+  background: transparent;
+  border: 1.5px solid rgba(245, 240, 232, 0.25);
+  color: rgba(245, 240, 232, 0.75);
+}
+.btn--outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.btn--ghost {
+  background: transparent;
+  border: 1.5px solid rgba(245, 200, 66, 0.35);
+  color: var(--gold);
+}
+.btn--ghost:hover {
+  background: rgba(245, 200, 66, 0.08);
+  box-shadow: 0 4px 20px rgba(245, 200, 66, 0.2);
+}

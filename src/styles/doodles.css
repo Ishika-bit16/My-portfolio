@@ -1,0 +1,12 @@
+/* ── Background doodle layer ── */
+.doodles-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.doodle {
+  position: absolute;
+  animation: floatA 3.5s ease-in-out infinite alternate;
+}

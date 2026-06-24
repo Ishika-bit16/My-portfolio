@@ -1,0 +1,16 @@
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid rgba(245, 240, 232, 0.07);
+  padding: 24px 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.footer__copy {
+  font-size: 0.8rem;
+  color: rgba(245, 240, 232, 0.25);
+  font-family: var(--font-body);
+}
