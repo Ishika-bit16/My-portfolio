@@ -11,35 +11,35 @@ import "./styles/sections.css";
 import "./styles/contact.css";
 import "./styles/footer.css";
 
-const GITHUB   = "https://github.com/Ishika-bit16";
+const GITHUB = "https://github.com/Ishika-bit16";
 const LINKEDIN = "https://www.linkedin.com/in/ishika-sogra-355318325";
 const TO_EMAIL = "ishi16sogra@gmail.com";
 
 const navLinks = [
-  { label: "Home",     id: "home"     },
-  { label: "About",    id: "about"    },
-  { label: "Skills",   id: "skills"   },
+  { label: "Home", id: "home" },
+  { label: "About", id: "about" },
+  { label: "Skills", id: "skills" },
   { label: "Projects", id: "projects" },
-  { label: "Contact",  id: "contact"  },
+  { label: "Contact", id: "contact" },
 ];
 
 const skills = [
-  "React", "JavaScript", "Python", "HTML/CSS", "Git", "Node.js",
-  "Figma", "SQL", "REST APIs", "Problem Solving", "TypeScript", "C++",
+  "C++",  "JavaScript", "Python", "HTML/CSS",  "Node.js","Git", "Git hub",
+  "Figma", "SQL", "REST APIs", "Problem Solving", "React","TypeScript", 
 ];
 
 const projects = [
   { title: "Portfolio Website", desc: "A responsive personal portfolio with smooth animations and dark aesthetic.", tech: ["React", "CSS", "Figma"] },
-  { title: "Data Dashboard",    desc: "Interactive analytics dashboard with real-time chart updates.",              tech: ["Python", "D3.js", "SQL"] },
-  { title: "Chat Application",  desc: "Real-time messaging app with authentication and rooms.",                    tech: ["Node.js", "Socket.io", "React"] },
-  { title: "ML Classifier",     desc: "Image classification model using CNNs with a clean web interface.",         tech: ["Python", "TensorFlow", "Flask"] },
+  { title: "Spendwise", desc: "Interactive analytics dashboard with real-time chart updates.", tech: ["JavaScript", "D3.js", "SQL"] },
+  { title: "Roadmap Analyzer", desc: "Real-time messaging app with authentication and rooms.", tech: ["Node.js", "Socket.io", "React"] },
+  { title: "Fake News Detector", desc: "Image classification model using CNNs with a clean web interface.", tech: ["Python", "TensorFlow", "Flask"] },
 ];
 
 const stats = [
-  { label: "Projects Built", val: "10+", color: "#F5C842" },
-  { label: "Technologies",   val: "12+", color: "#7EC8A0" },
-  { label: "GitHub Repos",   val: "20+", color: "#B8A9E8" },
-  { label: "Coffees ☕",     val: "∞",   color: "#F7A825" },
+  { label: "Projects Built", val: "", color: "#F5C842" },
+  { label: "Technologies", val: "", color: "#7EC8A0" },
+  { label: "GitHub Repos", val: "", color: "#B8A9E8" },
+  { label: "Coffees ☕", val: "∞", color: "#F7A825" },
 ];
 
 const WORD_LIMIT = 200;
@@ -50,13 +50,13 @@ function countWords(str) {
 
 export default function App() {
   const [navVisible, setNavVisible] = useState(true);
-  const [navOpen,    setNavOpen]    = useState(false);
-  const [scrolled,   setScrolled]   = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const lastScroll = useRef(0);
 
   // contact form
-  const [form,    setForm]    = useState({ name: "", email: "", message: "" });
-  const [status,  setStatus]  = useState("idle"); // idle | sending | sent | error
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const wordCount = countWords(form.message);
   const overLimit = wordCount > WORD_LIMIT;
 
@@ -72,8 +72,6 @@ export default function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  
-
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setNavOpen(false);
@@ -83,16 +81,36 @@ export default function App() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSend = () => {
+  const handleSend = async (e) => {
+    if (e) e.preventDefault();
     if (!form.name || !form.email || !form.message || overLimit) return;
-    // mailto fallback — opens mail client pre-filled
-    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
-    const body    = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-    );
-    window.location.href = `mailto:${TO_EMAIL}?subject=${subject}&body=${body}`;
-    setStatus("sent");
-    setForm({ name: "", email: "", message: "" });
+
+    setStatus("sending");
+
+    try {
+      const formData = new FormData();
+      formData.append("access_key", "c08b474f-272f-452f-83bf-b2be3a035501");
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("message", form.message);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setStatus("error");
+    }
   };
 
   return (
@@ -101,7 +119,7 @@ export default function App() {
 
       {/* ── TOP NAV ── */}
       <nav className={`top-nav ${scrolled ? "top-nav--scrolled" : ""} ${navVisible ? "" : "top-nav--hidden"}`}>
-        <span className="nav-logo" onClick={() => scrollTo("home")}>IS.</span>
+        
         <div className="nav-links">
           {navLinks.map((l) => (
             <span key={l.id} className="nav-link" onClick={() => scrollTo(l.id)}>{l.label}</span>
@@ -140,7 +158,7 @@ export default function App() {
           </div>
           <div className="hero__social">
             <span className="hero__social-label">Find me on</span>
-            <a href={GITHUB}   target="_blank" rel="noreferrer" className="hero__social-link hero__social-link--github">GitHub</a>
+            <a href={GITHUB} target="_blank" rel="noreferrer" className="hero__social-link hero__social-link--github">GitHub</a>
             <a href={LINKEDIN} target="_blank" rel="noreferrer" className="hero__social-link hero__social-link--linkedin">LinkedIn</a>
           </div>
         </div>
@@ -175,9 +193,9 @@ export default function App() {
           <Reveal delay={0.2}>
             <div className="about-grid">
               {[
-                { emoji: "🌻", text: "I'm Ishika — a developer who finds joy in the intersection of logic and aesthetics. I believe great software isn't just functional; it feels good to use." },
-                { emoji: "✨", text: "Currently building full-stack projects, exploring machine learning, and sharpening my design eye — all while keeping my code clean and my commits consistent." },
-                { emoji: "📍", text: "Based in India. Open to collaborations, internships, and exciting ideas. Let's build something that matters." },
+                { emoji: "🌻", text: "I’m Ishika, a developer & designer who build digital experiences where clean, predictable logic meets expressive, beautiful design." },
+                { emoji: "✨", text: "Right now, I’m translating complex ideas into full-stack applications and pixel-pushing my design work. Yes, my design files are just as organized as my GitHub repositories." },
+                { emoji: "📍 ", text: "Based in India, always ready for global collaborations, internships, or side-projects that push the envelope. Let’s build something people love to click." },
               ].map((card) => (
                 <div key={card.emoji} className="about-card">
                   <div className="about-card__emoji">{card.emoji}</div>
@@ -260,7 +278,7 @@ export default function App() {
                   <p className="contact-success__msg">Message sent! I'll get back to you soon.</p>
                 </div>
               ) : (
-                <>
+                <form onSubmit={handleSend}>
                   <div className="form-row">
                     <div className="form-group">
                       <label className="form-label">Your Name</label>
@@ -268,9 +286,10 @@ export default function App() {
                         className="form-input"
                         type="text"
                         name="name"
-                        placeholder="e.g. Jane Doe"
+                        placeholder="e.g. Name"
                         value={form.name}
                         onChange={handleChange}
+                        required
                       />
                     </div>
                     <div className="form-group">
@@ -279,9 +298,10 @@ export default function App() {
                         className="form-input"
                         type="email"
                         name="email"
-                        placeholder="e.g. jane@email.com"
+                        placeholder="e.g. example@email.com"
                         value={form.email}
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
@@ -299,25 +319,34 @@ export default function App() {
                       placeholder="What's on your mind?"
                       value={form.message}
                       onChange={handleChange}
+                      required
                     />
                     {overLimit && (
                       <span className="form-error">Please keep your message under {WORD_LIMIT} words.</span>
                     )}
+                    {status === "error" && (
+                      <span className="form-error">Something went wrong. Please try again later.</span>
+                    )}
                   </div>
                   <button
-                    className={`btn btn--primary contact-submit ${(!form.name || !form.email || !form.message || overLimit) ? "contact-submit--disabled" : ""}`}
-                    onClick={handleSend}
-                    disabled={!form.name || !form.email || !form.message || overLimit}
+                    type="submit"
+                    className={`btn btn--primary contact-submit ${(!form.name || !form.email || !form.message || overLimit || status === "sending") ? "contact-submit--disabled" : ""}`}
+                    disabled={!form.name || !form.email || !form.message || overLimit || status === "sending"}
                   >
-                    Send Message ✦
+                    {status === "sending" ? "Sending... ✦" : "Send Message ✦"}
                   </button>
-                  <p className="contact-note">Sends to {TO_EMAIL} • Usually responds within 24 hours</p>
-                </>
+                  <p className="contact-note">Sends securely via Web3Forms • Usually responds within 24 hours</p>
+                </form>
               )}
             </div>
           </Reveal>
         </div>
       </section>
+      {/* ── AUDIO── */}
+      <audio id="background-audio" loop autoPlay loop visibility="hidden"  >
+        <source src="src\assets\tunes\Daydreams-chosic.com_.mp3" type="audio/mpeg" />
+       
+      </audio>
 
       {/* ── FOOTER ── */}
       <footer className="footer">
