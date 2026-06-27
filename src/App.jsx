@@ -10,6 +10,7 @@ import "./styles/hero.css";
 import "./styles/sections.css";
 import "./styles/contact.css";
 import "./styles/footer.css";
+import portfolioAnimation from "./components/Ani";
 
 const GITHUB = "https://github.com/Ishika-bit16";
 const LINKEDIN = "https://www.linkedin.com/in/ishika-sogra-355318325";
@@ -343,7 +344,7 @@ export default function App() {
         </div>
       </section>
       {/* ── AUDIO── */}
-      <audio id="background-audio" loop autoPlay loop visibility="hidden"  >
+      <audio id="background-audio" loop autoPlay visibility="hidden" volume="0.01" >
         <source src="src\assets\tunes\Daydreams-chosic.com_.mp3" type="audio/mpeg" />
        
       </audio>

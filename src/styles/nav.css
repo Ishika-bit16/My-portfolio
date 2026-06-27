@@ -55,8 +55,8 @@
 }
 .nav-link:hover         { 
   color: var(--gold);
-blur: 12px; 
-shadow: 0 0 4px var(--gold);
+text-shadow: 4px 8px 12px 0px var(--gold); 
+
 }
 .nav-link--github:hover { color: var(--green); }
 .nav-link--linkedin:hover { color: var(--lavender); }
